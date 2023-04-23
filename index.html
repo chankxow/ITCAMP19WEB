@@ -22,7 +22,8 @@
 		.background #text{
 			position: relative;
 			font-size: 12em;
-			color: #000;
+			color: #FF0000;
+			pointer-events: none;
 		}
 		
 		.background .clouds{
@@ -39,7 +40,7 @@
 			position: absolute;
 			bottom: 0;
 			max-width: 100%;
-			animation: animate 5s linear infinite;
+			animation: animate calc(5s * var(--i)) linear infinite;
 			
 		}
 			
@@ -87,6 +88,7 @@
 		</div>
 	</section>
 	
+	<section class="info"></section>
 	
 </body>	
 	
