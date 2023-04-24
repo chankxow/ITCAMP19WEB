@@ -22,7 +22,7 @@
 		.background #text{
 			position: relative;
 			font-size: 12em;
-			color: #FF0000;
+			color: #000;
 			pointer-events: none;
 		}
 		
@@ -58,7 +58,9 @@
 				transform: scale(3);
 			}
 		}
-		
+		section {
+			position: relative;
+		}
 	</style>
 	<!-- STYLE -->
 	
@@ -71,7 +73,7 @@
 	<section class="container">
 		<div class="background">
 		
-		<h2 id="text"> VALSTRAX </h2>
+		<h2 id="text"> Gryphon </h2>
 			
 			<div class="clouds">
 				<img src="pic/Clouds/cloud1.png">
@@ -88,8 +90,19 @@
 		</div>
 	</section>
 	
-	<section class="info"></section>
+	<section class="info-con">
+		<div class="info">
+		
+		</div>
+	</section>
 	
+	<script type="text/javascript">
+		let text = document.getElementById('text');
+		window.addEventListener('scroll',function(){
+			let value =window.scrollY;
+			text.style.marginBottom = value * 2 + 'px'
+		})
+	</script>
 </body>	
 	
 </html>
