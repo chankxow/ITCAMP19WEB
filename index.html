@@ -8,14 +8,15 @@
 			padding: 0;
 			box-sizing: border-box;
 		}
-		.background{
+		.container{
 			position:relative;
 			width: 100%;
 			height:100vh;
 			background: url("pic/104815.jpg");
 			background-size: cover;
 			background-position:center;
-			display: flex;
+			display:grid;
+			grid-template-columns: repeat(1);
 			justify-content: center;
 			align-items: center;
 		}
@@ -61,6 +62,22 @@
 		section {
 			position: relative;
 		}
+		
+		.info img{
+			w
+		}
+		
+		.content{
+			width: 100%;
+		}
+		.info {
+			
+			padding: 3rem;
+			display:grid;
+			grid-template-columns: repeat(1);
+			align-items: center;
+			justify-content: center;
+		}
 	</style>
 	<!-- STYLE -->
 	
@@ -88,14 +105,21 @@
 				<img src="pic/Clouds/cloud5.png" style="--i:6;">
 			</div>
 		</div>
-	</section>
 	
-	<section class="info-con">
+	
+	<section class="content">
 		<div class="info">
-		
+			<div class="img-con">
+				
+			</div>
+			<div class="info">
+			<img src="pic/gryphon.jpg" alt="">
+			<h1>Lorem ipsum.</h1>
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. In, commodi.</p>
+			</div>
 		</div>
 	</section>
-	
+	</section>
 	<script type="text/javascript">
 		let text = document.getElementById('text');
 		window.addEventListener('scroll',function(){
