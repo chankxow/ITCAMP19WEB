@@ -4,63 +4,33 @@
 	
 	<!-- STYLE -->
 	<style>
+		@import url('https://fonts.googleapis.com/css2?family=Niramit:wght@300&display=swap');
+		
+		
 		*{margin: 0;
 			padding: 0;
 			box-sizing: border-box;
 		}
+		
+		body{
+			background: #010718;
+		}
+		
 		.container{
 			display:grid;
-			position:relative;
 			width: 100%;
 			height:100vh;
-			background: url("pic/104815.jpg");
-			background-size: cover;
-			background-position:center;
 			grid-template-columns: repeat(1);
 			justify-content: center;
 			align-items: center;
 		}
-		.background #text{
-			position: relative;
+		.text{
+			text-shadow:0 0 10px #44ddff,
+				0 0 50px #44ddff;
 			font-size: 12em;
-			color: #000;
+			color: #89F8FF;
 			pointer-events: none;
-		}
-		
-		.background .clouds{
-			position: absolute;
-			top: 0;
-			left: 0;
-			width: 100%;
-			height: 100%;
-			overflow: hidden;
-			pointer-events: none;
-		}
-		
-		.background .clouds img{
-			position: absolute;
-			bottom: 0;
-			max-width: 100%;
-			animation: animate calc(5s * var(--i)) linear infinite;
-			
-		}
-			
-		@keyframes animate {
-			0%{
-				opacity: 0;
-				transform: scale(1);
-				
-			}
-			25%,75%{
-				opacity: 1;
-			}
-			100%{
-				opacity: 0;
-				transform: scale(3);
-			}
-		}
-		section {
-			position: relative;
+			font-family: 'Niramit'
 		}
 		
 		
@@ -73,12 +43,14 @@
 			grid-template-columns: repeat(1);
 			align-items: center;
 			justify-content: center;
+			height: 100vh;
 		}
 		
 		.card-pic{
 			display: flex;
 			align-items: center;
 			justify-content: center;
+			column-gap: 50px;
 		}
 		
 		.card-item{
@@ -88,36 +60,78 @@
 			height: 500px;
 			width: 100px;
 			border-radius: 100px;
-				
+			overflow:hidden;
+			filter:grayscale(80%);
+			transition: .5s;
+		}
+		
+		.card-item img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			object-position: center;
+		}
+		
+		.card-item button{
+			display: flex;
+			position: absolute;
+			bottom: 15px;
+			width: 70px;
+			height: 70px;
+			border-radius: 50%;
+			background: rgb(255,255,255,0.6);
+			justify-content: center;
+			align-items: center;
+			color: #030d28;
+			transition: .5s;
+			border: none;
+		}
+		
+		.card-item button:hover{
+			cursor: pointer;
+			background: #030d28;
+			color: #fff;
+		}
+		
+		.card-item i {
+			font-size: 30px;
+		}
+		
+		.expand {
+			width:400px;
+			border-radius: 20px;
+			box-shadow: 0 0 10px #44ddff,
+				0 0 50px #44ddff;
+			filter:grayscale(0);
+		}
+			
+		#name{
+			font-size:50px;
+			font-family: 'Niramit';
+			color:#fff;
+			transition: 10s;
+		}
+		#info-1{
+			font-size:25px;
+			font-family: 'Niramit';
+			color:#fff;
+			transition: 10s;
 		}
 	</style>
 	<!-- STYLE -->
 	
 <meta charset="utf-8">
 <title>Untitled Document</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css">
 </head>
-
 <body>
-	
+
 	<section class="container">
-		<div class="background">
 		
-		<h2 id="text"> Gryphon </h2>
-			
-			<div class="clouds">
-				<img src="pic/Clouds/cloud1.png">
-				<img src="pic/Clouds/cloud2.png" style="--i:2;">
-				<img src="pic/Clouds/cloud3.png" style="--i:3;">
-				<img src="pic/Clouds/cloud4.png" style="--i:4;">
-				<img src="pic/Clouds/cloud5.png" style="--i:5;">
-				<img src="pic/Clouds/cloud1.png" style="--i:10;">
-				<img src="pic/Clouds/cloud2.png" style="--i:9;">
-				<img src="pic/Clouds/cloud3.png" style="--i:8;">
-				<img src="pic/Clouds/cloud4.png" style="--i:7;">
-				<img src="pic/Clouds/cloud5.png" style="--i:6;">
-			</div>
-		</div>
+			<span class="text"> สัตว์วิเศษ </span>
 	
+	
+	</section>
 	
 	<section class="content">
 		<div class="info">
@@ -128,22 +142,66 @@
 			<ul class="card-pic">
 				<li class="card-item">
 					<img src="pic/gryphon/cosmicUnicon.jpg" alt="">
+					<button onclick="unicon()" id="1"><i class="bi bi-eye"></i></button>
+					
 				</li>
 				<li class="card-item">
 					<img src="pic/gryphon/dragon.jpg" alt="">
+					<button onclick="dragon()" id="2"><i class="bi bi-eye"></i></button>
 				</li>
 				<li class="card-item">
 					<img src="pic/gryphon/snowgryphon.png" alt="">
+					<button onclick="gryphon()" id="3"><i class="bi bi-eye"></i></button>
 				</li>	
 			</ul>
-			<h1>Lorem ipsum.</h1>
-			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. In, commodi.</p>
+			<h1 id="name"></h1>
+			<p id="info-1"></p>
 			</div>
 		</div>
 	</section>
-	</section>
-	
-	
-</body>	
-	
+	<script>
+		 
+		const expandBtns = document.querySelectorAll(".card-item button");
+		
+		expandBtns.forEach((btn,index) =>{
+			btn.addEventListener("click",() =>{
+				for (let i = 0; i <expandBtns.length; i++){
+					if(index == i){
+						expandBtns[i].parentElement.classList.toggle("expand");
+					}
+					else{
+						expandBtns[i].parentElement.classList.remove("expand");
+					}
+				}
+			})
+		});
+		
+		const text = document.querySelector(".text");
+		
+		 const textLoad = () => {
+            setTimeout(() => {
+                text.textContent = "Freelancer";
+            }, 0);}
+		
+		 function unicon() {
+			document.getElementById("name").innerHTML = "Unicon";
+			document.getElementById("info-1").innerHTML = "ยูนิคอร์น (อังกฤษ: unicorn) เป็นสัตว์ในตำนานซึ่งมีการอธิบายมาแต่โบราณว่าเป็นสัตว์ที่มีเขาเกลียวแหลมขนาดใหญ่ออกมาจากหน้าผาก มีการพรรณนายูนิคอร์นในตราโบราณของอารยธรรมลุ่มแม่น้ำสินธุและชาวกรีกโบราณกล่าวถึงยูนิคอร์นในบันทึกประวัติศาสตร์ธรรมชาติโดยนักเขียนหลายคน รวมไปถึงคัมภีร์ไบเบิลฉบับพระเจ้าเจมส์ก็มีอธิบายเช่นกันในนิทานพื้นบ้านยุโรป มักพรรณนายูนิคอร์นว่าเป็นสัตว์คล้ายม้าหรือคล้ายแพะสีขาว มีเขายาวและมีกีบแยก (บ้างมีเคราแพะด้วย) ในสมัยกลางและฟื้นฟูศิลปวิทยา มีการอธิบายทั่วไปว่า ยูนิคอร์นเป็นสัตว์ป่าหายากยิ่ง สัญลักษณ์แห่งความบริสุทธิ์และสง่างาม ซึ่งอาจจับได้เฉพาะพรหมจารีเท่านั้น ในสารานุกรมกล่าวกันว่าเขาของยูนิคอร์นมีอำนาจเปลี่ยนน้ำพิษให้ดื่มได้ และรักษาการเจ็บป่วย ในสมัยนั้นบางครั้งมีการขายเขานาร์วาลเป็นเขายูนิคอร์น";
+		 }
+		
+		function dragon() {
+			document.getElementById("name").innerHTML = "Dragon";
+			document.getElementById("info-1").innerHTML = "มังกร (อังกฤษ: dragon; จากละติน: draco) เป็นสัตว์วิเศษที่รู้จักกันในวรรณคดีของจีนและตะวันตก แม้จะใช้คำว่ามังกร (dragon) เหมือนกัน แต่มังกรของจีนและตะวันตกนั้นสื่อถึงสัตว์ต่างชนิดกัน มังกรของจีนมีรูปร่างลักษณะจัดอยู่ในประเภทสัตว์เลื้อยคลานหรืองู ไม่มีปีก แต่สามารถบินไปในอากาศได้ ส่วนมังกรของตะวันตกจะมีขา มีปีกและสามารถพ่นไฟได้ในตำนานยุโรป มังกรเป็นสัตว์อันตรายและน่าสะพรึงกลัวสำหรับมนุษย์ มังกรจึงเป็นศัตรูตัวฉกาจของเหล่าวีรบุรุษทั้งหลาย การฆ่ามังกรและขึ้นเถลิงราชย์เป็นกษัตริย์. มังกรจึงกลายเป็นสัญลักษณ์ของกษัตริย์ ทั้งที่มีตัวตนจริง ๆ และในตำนานต่าง ๆ เช่น กษัตริย์อาเธอร์ ซึ่งมีนามสกุลว่า Pendragon มีความหมายว่า 'ศีรษะของมังกร' หรือ 'หัวหน้ามังกร' และมงกุฎของกษัตริย์อาเธอร์ ก็เป็นรูปมังกร ส่วนในตำนานจีน มังกรเป็นสัตว์มงคลและมีสถานะเป็นเทพเจ้า เสื้อคลุมมังกร 5 เล็บเป็นเครื่องทรงของที่กษัตริย์สามารถใช้ได้เท่านั้น ส่วนเครื่องทรงที่มีรูปมังกร 4 เล็บจะเป็นชุดสำหรับขุนนาง และ 3 เล็บสำหรับประชาชนทั่วไปเราพบมังกรได้ง่ายและบ่อยมาก ไม่ว่าจะเป็นในตำนานของทางยุโรปหรือเอเชียก็ตาม เรียกว่าที่ใดมีอารยธรรมและตำนาน ที่นั่นก็ต้องมีมังกรเป็นของคู่กัน. มังกรนั้นมีรูปร่างและลักษณะหลายอย่าง แตกต่างไปตามความเชื่อของแต่ละท้องถิ่น แต่โดยทั่ว ๆ ไปแล้วจะมีจุดเด่นคือ เป็นสัตว์ขนาดใหญ่ ร่างกายใหญ่โต มีพละกำลังมาก บางครั้งอาจพ่นไฟได้ หรือมีอำนาจเวทมนตร์มหาศาล และที่สำคัญคือ บินได้ (อาจจะมีปีกหรือไม่มีก็ได้) โดยขนาดรูปร่างและสีนั้น ก็แตกต่างกันไปอย่างไรก็ตาม มังกรที่พบในตำนานของทางยุโรปและของทางเอเชียนั้น ค่อนข้างจะแตกต่างกันในแง่สัญลักษณ์ โดยเฉพาะคติของจีนที่มักจะถือว่า มังกรนั้นคือเทพเจ้า และเป็นสัญลักษณ์ของความเป็นมงคล รวมถึงเป็นสัญลักษณ์ของจักรพรรดิ (ซึ่งเป็นสมมติเทพ) แต่ทางยุโรปนั้นมักจะถือมังกรเป็นสัญลักษณ์ของความชั่วร้าย (อันเป็นคติที่สืบทอดมาจากความหวาดกลัวงูของชาวยุโรป)";
+		 }
+		
+		function gryphon() {
+			document.getElementById("name").innerHTML = "Gryphon";
+			document.getElementById("info-1").innerHTML = "กริฟฟอน หรือ กริฟฟิน (อังกฤษ: griffin, gryphin, griffon หรือ gryphon) คือสัตว์ในเทพนิยายร่างกายเป็นครึ่งนกอินทรี ครึ่งสิงโต โดยส่วนหัว ขาคู่หน้าและปีก เป็นนกอินทรี ส่วนลำตัวและขาคู่หลังเป็นสิงโต และมีหางเป็นงู บางจำพวกก็มี หางของสิงโต ขนบนหลังเป็นสีดำ ขนที่อยู่ข้างหน้าเป็นสีแดง ส่วนขนปีกเป็นสีขาว อาศัยอยู่ในถ้ำตามภูเขาตามตำนานกรีก กริฟฟินเป็นสัตว์เทพผู้พิทักษ์เหมืองทองคำของดินแดนไฮเปอร์โบเรีย (ดินแดนในตำนานซึ่งอยู่ทางขั้วโลกเหนือ มีแสงอาทิตย์ และความอุดมสมบูรณ์ตลอดกาล) เป็นรูปจำแลงของเทพีเนเมซิส เทพแห่งความพยาบาท ซึ่งทำหน้าที่หมุนวงล้อแห่งโชคชะตา, นอกจากนี้ยังเป็นผู้ลากรถม้าของพระอาทิตย์ (เทพอพอลโล) อีกด้วยกริฟฟินนั้นเป็นสัญลักษณ์ของพลังอำนาจ และบางครั้งยังถือว่ากริฟฟินเป็นสัญลักษณ์ของความหยิ่งยโสอีกด้วยในยุคแรก กริฟฟินถูกเปรียบเทียบให้เป็นเหมือนกับซาตาน ที่คอยล่อลวงวิญญานของมนุษย์ให้ติดกับ แต่ต่อมากริฟฟินก็กลายเป็นสัญลักษณ์ของทั้งทวยเทพ และมนุษย์ สำหรับพระเยซู เพราะมันเป็นเจ้าแห่งพิภพและเวหา อีกทั้งมีรังสีแห่งแสงอาทิตย์ ศัตรูของกริฟฟินคือ บาซิลิสก์ ซึ่งเปรียบได้กับรูปจำลองของซาตานปัจจุบันสามารถพบเห็นกริฟฟินได้ทั่วไปจากงานศิลปะในหลาย ๆ วัฒนธรรม และพบได้ในตราประจำตระกูล รูปสัตว์ต่าง ๆ, ประติมากรรมเก่าแก่, โมเสกนูนต่ำ, นิทาน และในตำนานต่าง ๆ ทั่วโลก";
+		 }
+		
+		
+
+	</script>
+</body>
 </html>
+	
+	
